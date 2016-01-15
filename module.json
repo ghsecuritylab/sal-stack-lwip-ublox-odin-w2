@@ -1,0 +1,37 @@
+{
+  "name": "sal-stack-lwip-ublox-odin-w2",
+  "version": "0.0.1",
+  "description": "sal for u-blox odin w2",
+  "private": true,
+  "keywords": [
+    "ublox",
+    "odin-w2",
+    "c029",
+    "network",
+    "sockets"
+  ],
+  "author": "andreas.larsson@u-blox.com",
+  "licenses": [],
+  "extraIncludes": [
+    "sal-stack-lwip-ublox-odin-w2",
+    "sal-stack-lwip-ublox-odin-w2/arch",
+    "source/lwip/include"
+    ],
+  "dependencies": {
+    "ublox-odin-w2-lwip-adapt": "0.0.1",
+    "sal": "^1.0.0"
+  },
+  "targetDependencies": {},
+  "testDependencies": {
+    "sockets": "^1.0.0"
+  },
+  "scripts": {
+    "testReporter": [
+      "mbedgt",
+      "--digest",
+      "stdin",
+      "-v",
+      "-V"
+    ]
+  }
+}
