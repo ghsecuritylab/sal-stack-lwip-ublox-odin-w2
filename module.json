@@ -18,7 +18,7 @@
     "source/lwip/include"
     ],
   "dependencies": {
-    "ublox-odin-w2-lwip-adapt": "0.0.1",
+    "ublox-odin-w2-lwip-adapt": "*",
     "sal": "^1.0.0"
   },
   "targetDependencies": {},
