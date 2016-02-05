@@ -908,7 +908,7 @@ dhcp_discover(struct netif *netif)
     pbuf_realloc(dhcp->p_out, sizeof(struct dhcp_msg) - DHCP_OPTIONS_LEN + dhcp->options_out_len);
 
     LWIP_DEBUGF(DHCP_DEBUG | LWIP_DBG_TRACE, ("dhcp_discover: sendto(DISCOVER, IP_ADDR_BROADCAST, DHCP_SERVER_PORT)\n"));
-    if (netif_default != NULL && netif->flags && NETIF_FLAG_POINTTOPOINT != 0U)/*@CE Use default netif for ppp-dhcp request*/
+    if (netif_default != NULL && ((netif->flags & NETIF_FLAG_POINTTOPOINT) != 0U))/*@CE Use default netif for ppp-dhcp request*/
         udp_sendto_if_src(dhcp->pcb, dhcp->p_out, &netif_default->dhcp->server_ip_addr, DHCP_SERVER_PORT, netif_default, &netif_default->ip_addr);
     else
         udp_sendto_if_src(dhcp->pcb, dhcp->p_out, IP_ADDR_BROADCAST, DHCP_SERVER_PORT, netif, IP_ADDR_ANY);
