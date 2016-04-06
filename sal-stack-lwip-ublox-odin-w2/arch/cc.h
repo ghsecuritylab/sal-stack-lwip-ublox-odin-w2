@@ -39,8 +39,9 @@
 #include "cb_comdefs.h"
 
 /* prototypes for printf() and abort() */
-#include "cb_log.h"
-#include "cb_assert.h"
+#include "mbed-drivers/mbed_assert.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 #define BYTE_ORDER LITTLE_ENDIAN
 
@@ -73,7 +74,7 @@ typedef u32_t mem_ptr_t;
 /* Platform specific diagnostic output */
 
 #ifndef NDEBUG
-#  define LWIP_PLATFORM_DIAG(x)   do { cbLOG_PRINT x ; } while(0)
+#  define LWIP_PLATFORM_DIAG(x)   do { printf x ; } while(0)
 #else
 #  define LWIP_PLATFORM_DIAG(x)   
 #endif
@@ -81,14 +82,14 @@ typedef u32_t mem_ptr_t;
 #ifndef NDEBUG
 #ifdef __LWIP_FILE__
 #define LWIP_PLATFORM_ASSERT(x) do {    \
-          cbLOG_PRINT("lwIP assert %s:%d: %s\n\n", __LWIP_FILE__, __LINE__, x); \
-          cb_ASSERT(0); \
+          printf("lwIP assert %s:%d: %s\n\n", __LWIP_FILE__, __LINE__, x); \
+          MBED_ASSERT(0); \
         } while(0)
 #else
 /* NOTE: Assert info string removed on purpose to reduce code size */
 #define LWIP_PLATFORM_ASSERT(x) do { \
-          cbLOG_PRINT("lwIP assert %s:%d\n", __FILE__, __LINE__); \
-          cb_ASSERT(0); \
+          printf("lwIP assert %s:%d\n", __FILE__, __LINE__); \
+          MBED_ASSERT(0); \
         } while(0)
 #endif
 
