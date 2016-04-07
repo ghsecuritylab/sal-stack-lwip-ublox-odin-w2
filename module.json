@@ -1,6 +1,6 @@
 {
   "name": "sal-stack-lwip-ublox-odin-w2",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "sal for u-blox odin w2",
   "private": true,
   "keywords": [
