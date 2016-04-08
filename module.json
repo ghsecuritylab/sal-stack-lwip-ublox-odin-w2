@@ -11,7 +11,27 @@
     "sockets"
   ],
   "author": "andreas.larsson@u-blox.com",
-  "licenses": [],
+  "licenses": [
+    {
+      "url": "https://spdx.org/licenses/Apache-2.0",
+      "type": "Apache-2.0"
+    },
+    {
+      "url": "https://spdx.org/licenses/BSD-3-Clause",
+      "type": "BSD-3-Clause"
+    },
+    {
+      "url": "https://spdx.org/licenses/BSD-4-Clause",
+      "type": "BSD-4-Clause"
+    },
+    {
+      "url": "https://spdx.org/licenses/MIT",
+      "type": "MIT"
+    },
+    {
+      "type": "LicenseRef-bsd-previous.txt"
+    }
+  ],
   "extraIncludes": [
     "sal-stack-lwip-ublox-odin-w2",
     "sal-stack-lwip-ublox-odin-w2/arch",
