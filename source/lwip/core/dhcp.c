@@ -681,7 +681,14 @@ dhcp_start(struct netif *netif)
   }
   ip_set_option(dhcp->pcb, SOF_BROADCAST);
   /* set up local and remote port for the pcb */
-  udp_bind(dhcp->pcb, IP_ADDR_ANY, DHCP_CLIENT_PORT);
+#if PPP_SUPPORT
+  if (IS_PUBLIC_PPP_NETIF(netif)) {/*@CE For dhcp relay we need local port to be 67 as well*/
+      udp_bind(dhcp->pcb, IP_ADDR_ANY, DHCP_SERVER_PORT);
+  } else
+#endif
+  {      
+      udp_bind(dhcp->pcb, IP_ADDR_ANY, DHCP_CLIENT_PORT);
+  }
   udp_connect(dhcp->pcb, IP_ADDR_ANY, DHCP_SERVER_PORT);
   /* set up the recv callback and argument */
   udp_recv(dhcp->pcb, dhcp_recv, netif);

@@ -2910,6 +2910,8 @@
 #ifndef ip4_addr_cmp
 #define ip4_addr_cmp ip_addr_cmp
 #endif
+#ifndef IS_PUBLIC_PPP_NETIF
+#define IS_PUBLIC_PPP_NETIF(netif) ((netif->name[0] == 'p') &&  (netif->name[1] == 'p') && (netif->num == 255))
 #endif
-
+#endif
 #endif /* LWIP_HDR_OPT_H */
