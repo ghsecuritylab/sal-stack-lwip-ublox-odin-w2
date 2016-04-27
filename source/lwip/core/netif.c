@@ -527,7 +527,7 @@ void netif_set_up(struct netif *netif)
     if (netif->flags & NETIF_FLAG_LINK_UP) {
 #if LWIP_ARP
       /* For Ethernet network interfaces, we would like to send a "gratuitous ARP" */ 
-      if (netif->flags & (NETIF_FLAG_ETHARP)) {
+      if (netif->flags & (NETIF_FLAG_ETHARP | NETIF_FLAG_POINTTOPOINT) == NETIF_FLAG_ETHARP) {
         etharp_gratuitous(netif);
       }
 #endif /* LWIP_ARP */
@@ -625,7 +625,7 @@ void netif_set_link_up(struct netif *netif )
     if (netif->flags & NETIF_FLAG_UP) {
 #if LWIP_ARP
       /* For Ethernet network interfaces, we would like to send a "gratuitous ARP" */ 
-      if (netif->flags & NETIF_FLAG_ETHARP) {
+      if (netif->flags & (NETIF_FLAG_ETHARP | NETIF_FLAG_POINTTOPOINT) == NETIF_FLAG_ETHARP) {
         etharp_gratuitous(netif);
       }
 #endif /* LWIP_ARP */
