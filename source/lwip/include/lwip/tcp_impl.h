@@ -489,6 +489,7 @@ void tcp_rst_impl(u32_t seqno, u32_t ackno,
 #endif /* LWIP_IPV6 */
 
 u32_t tcp_next_iss(void);
+void tcp_force_retry(struct tcp_pcb *pcb);
 
 void tcp_keepalive(struct tcp_pcb *pcb);
 void tcp_zero_window_probe(struct tcp_pcb *pcb);

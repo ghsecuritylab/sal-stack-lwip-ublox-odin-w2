@@ -1691,6 +1691,30 @@ tcp_next_iss(void)
   return iss;
 }
 
+/**
+* Poke a PCB to force an immidiate retransmission or persist probe
+* if one is pending and scheduled in the future.
+*/
+void
+tcp_force_retry(struct tcp_pcb *pcb)
+{
+    /* If persist timer is running, force a persist probe next
+    * time tcp_slowtmr() is hit. */
+    if (pcb->persist_backoff > 0) {
+        pcb->persist_backoff = 1;
+        pcb->persist_cnt = tcp_persist_backoff[pcb->persist_backoff - 1];
+    }
+
+    /* If retransmit timer is running, force a retransmit next
+    * time tcp_slowtmr() is hit. */
+    if (pcb->rtime >= 0) {
+        pcb->nrtx = 0;
+        pcb->rto = ((pcb->sa >> 3) + pcb->sv) << tcp_backoff[pcb->nrtx];
+        pcb->rtime = pcb->rto;
+    }
+}
+
+
 #if TCP_CALCULATE_EFF_SEND_MSS
 /**
  * Calculates the effective send mss that can be used for a specific IP address
