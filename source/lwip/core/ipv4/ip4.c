@@ -710,6 +710,13 @@ err_t ip_output_if_opt_src(struct pbuf *p, ip_addr_t *src, ip_addr_t *dest,
   u32_t chk_sum = 0;
 #endif /* CHECKSUM_GEN_IP_INLINE */
 
+  /* u-blox edit: Port if TCP resends before previous packet has been transfered from link layer (WLAN)
+  *  In case of update of lwip, make sure to check if this issue remains.
+  */
+  if ((p)->ref > 1) {
+      return ERR_OK;
+  }
+
   LWIP_IP_CHECK_PBUF_REF_COUNT_FOR_TX(p);
 
   snmp_inc_ipoutrequests();
@@ -865,6 +872,13 @@ ip_output(struct pbuf *p, ip_addr_t *src, ip_addr_t *dest,
 {
   struct netif *netif;
 
+  /* u-blox edit: Port if TCP resends before previous packet has been transfered from link layer (WLAN)
+  *  In case of update of lwip, make sure to check if this issue remains.
+  */
+  if ((p)->ref > 1) {
+      return ERR_OK;
+  }
+      
   LWIP_IP_CHECK_PBUF_REF_COUNT_FOR_TX(p);
 
   if ((netif = ip_route(dest)) == NULL) {
@@ -902,6 +916,13 @@ ip_output_hinted(struct pbuf *p, ip_addr_t *src, ip_addr_t *dest,
 {
   struct netif *netif;
   err_t err;
+
+  /* u-blox edit: Port if TCP resends before previous packet has been transfered from link layer (WLAN) 
+  *  In case of update of lwip, make sure to check if this issue remains. 
+  */
+  if ((p)->ref > 1) { 
+      return ERR_OK; 
+  }
 
   LWIP_IP_CHECK_PBUF_REF_COUNT_FOR_TX(p);
 

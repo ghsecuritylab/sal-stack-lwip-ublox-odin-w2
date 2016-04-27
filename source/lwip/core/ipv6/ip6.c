@@ -773,6 +773,13 @@ ip6_output_if_src(struct pbuf *p, ip6_addr_t *src, ip6_addr_t *dest,
   struct ip6_hdr *ip6hdr;
   ip6_addr_t dest_addr;
 
+  /* u-blox edit: Port if TCP resends before previous packet has been transfered from link layer (WLAN)
+  *  In case of update of lwip, make sure to check if this issue remains.
+  */
+  if ((p)->ref > 1) {
+      return ERR_OK;
+  }
+
   LWIP_IP_CHECK_PBUF_REF_COUNT_FOR_TX(p);
 
   /* Should the IPv6 header be generated or is it already included in p? */
@@ -865,6 +872,13 @@ ip6_output(struct pbuf *p, ip6_addr_t *src, ip6_addr_t *dest,
   struct ip6_hdr *ip6hdr;
   ip6_addr_t src_addr, dest_addr;
 
+  /* u-blox edit: Port if TCP resends before previous packet has been transfered from link layer (WLAN)
+  *  In case of update of lwip, make sure to check if this issue remains.
+  */
+  if ((p)->ref > 1) {
+      return ERR_OK;
+  }
+
   LWIP_IP_CHECK_PBUF_REF_COUNT_FOR_TX(p);
 
   if (dest != IP_HDRINCL) {
@@ -923,6 +937,13 @@ ip6_output_hinted(struct pbuf *p, ip6_addr_t *src, ip6_addr_t *dest,
   struct ip6_hdr *ip6hdr;
   ip6_addr_t src_addr, dest_addr;
   err_t err;
+
+  /* u-blox edit: Port if TCP resends before previous packet has been transfered from link layer (WLAN) 
+  *  In case of update of lwip, make sure to check if this issue remains. 
+  */
+  if ((p)->ref > 1) { 
+      return ERR_OK; 
+  }
 
   LWIP_IP_CHECK_PBUF_REF_COUNT_FOR_TX(p);
 
