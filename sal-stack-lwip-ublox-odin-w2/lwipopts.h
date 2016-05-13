@@ -687,7 +687,7 @@
  * numbers after booting a device.
  */
 #ifndef LWIP_RANDOMIZE_INITIAL_LOCAL_PORTS
-#define LWIP_RANDOMIZE_INITIAL_LOCAL_PORTS 0
+#define LWIP_RANDOMIZE_INITIAL_LOCAL_PORTS 1
 #endif
 
 /*
